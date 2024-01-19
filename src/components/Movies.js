@@ -5,26 +5,21 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    let moviesList = [
-      {
-        id: 1,
-        title: "Highlander",
-        release_date: "1986-03-07",
-        runtime: 116,
-        mpaa_rating: "R",
-        desciption: "Some long description",
-      },
-      {
-        id: 2,
-        title: "Raider of the Lost Ark",
-        release_date: "1981-06-12",
-        runtime: 115,
-        mpaa_rating: "PG-13",
-        desciption: "Some long description",
-      },
-    ];
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
 
-    setMovies(moviesList);
+    const requestOptions = {
+      method: "GET",
+      headers: headers,
+    };
+    fetch(`http://localhost:8080/movies`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setMovies(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   return (
     <div>
