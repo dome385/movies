@@ -30,7 +30,7 @@ const Login = () => {
       body: JSON.stringify(payload),
     };
 
-    fetch(`/authenticate`, requestOptions)
+    fetch("/authenticate", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
