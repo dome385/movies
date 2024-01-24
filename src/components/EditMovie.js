@@ -116,6 +116,8 @@ const EditMovie = () => {
           errorDiv={hasError("description") ? "text-danger" : "d-none"}
         />
       </form>
+
+      <hr />
     </div>
   );
 };
