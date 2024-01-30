@@ -123,7 +123,7 @@ function App() {
                     Film hinzufügen
                   </Link>
                   <Link
-                    to="/admin"
+                    to="/manage-catalogue"
                     className="list-group-item list-group-item-action"
                   >
                     Katalog bearbeiten

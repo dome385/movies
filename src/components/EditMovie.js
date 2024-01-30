@@ -4,6 +4,7 @@ import Input from "./form/Input";
 import Select from "./form/Select";
 import Textarea from "./form/Textarea";
 import Checkbox from "./form/Checkbox";
+import Swal from "sweetalert2";
 
 const EditMovie = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const EditMovie = () => {
   }
 
   useEffect(() => {
-    if (jwtToken === " ") {
+    if (jwtToken === "") {
       navigate("/login");
       return;
     }
@@ -123,18 +124,67 @@ const EditMovie = () => {
       }
     });
 
+    if (movie.genres_array.length === 0) {
+      Swal.fire({
+        title: "Error",
+        text: "You must choose atleast one genre!",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      errors.push("genres");
+    }
+
     setErrors(errors);
 
     if (errors.length > 0) {
       return false;
     }
+
+    // passed validation, so save changes
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", "Bearer " + jwtToken);
+
+    // assume we are adding a new movie
+    let method = "PUT";
+
+    if (movie.id > 0) {
+      method = "PATCH";
+    }
+
+    const requestBody = movie;
+    // we need to convert to valuzes in JSON for release date (to date)
+    // and for runtime to int
+
+    requestBody.release_date = new Date(movie.release_date);
+    requestBody.runtime = parseInt(movie.runtime, 10);
+
+    let requestOptions = {
+      body: JSON.stringify(requestBody),
+      method: method,
+      headers: headers,
+      credentials: "include",
+    };
+
+    fetch(`/admin/movies/${movie.id}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          navigate("/manage-catalogue");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleChange = () => (event) => {
     let value = event.target.value;
-    console.log("Value: " + value);
+
     let name = event.target.name;
-    console.log("Name: " + name);
+
     setMovie({
       ...movie,
       [name]: value,
@@ -240,7 +290,7 @@ const EditMovie = () => {
             ))}
           </>
         )}
-        <button className="btn btn-primary">Save</button>
+        <button className="btn btn-primary mt-3 mb-3">Save</button>
       </form>
     </div>
   );
