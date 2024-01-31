@@ -1,3 +1,53 @@
+<br/>
+<p align="center">
+  <h3 align="center">Movies</h3>
+
+  <p align="center">
+    Save Movies
+    <br/>
+    <br/>
+    <a href="https://github.com/dome385/movies">View Demo</a>
+    .
+  </p>
+</p>
+
+## Table Of Contents
+
+- [About the Project](#about-the-project)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+
+## About The Project
+
+This project emerged from the endeavor to explore and understand the seamless integration of React in the frontend and Golang in the backend, while utilizing a PostgreSQL database for storing movie data. The web application was developed to provide a user-friendly interface for adding, editing, and deleting movies. Integration of an external API enables dynamic retrieval and display of movie posters, enhancing the user experience. Additionally, Docker was employed to standardize the development environment and simplify deployment.
+
+## Built With
+
+React for the frontend
+Golang for the backend
+PostgreSQL as the database
+External API for poster integration
+Docker for standardizing the development environment and deployment
+
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+- npm
+
+```sh
+npm install npm@latest -g
+```
+
+### Installation
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
